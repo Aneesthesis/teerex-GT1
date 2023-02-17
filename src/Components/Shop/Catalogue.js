@@ -11,12 +11,16 @@ function Catalogue(props) {
       {prods.map((prod) => (
         <ProductItem
           key={prod.id}
-          name={prod.name}
-          image={prod.imageURL}
-          colour={prod.color}
-          type={prod.type}
-          gender={prod.gender}
-          price={prod.price}
+          item={{
+            id: prod.id,
+            name: prod.name,
+            image: prod.imageURL,
+            colour: prod.color,
+            type: prod.type,
+            gender: prod.gender,
+            price: prod.price,
+            available: prod.quantity,
+          }}
         />
       ))}
     </div>
