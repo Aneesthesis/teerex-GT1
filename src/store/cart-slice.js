@@ -47,6 +47,9 @@ const cartSlice = createSlice({
       const setQuantity = action.payload.quantity;
       const existingItem = state.items.find((item) => item.id === id);
 
+      //resetting the total items count in the cart
+      state.totalItems -= existingItem.quantity;
+
       if (setQuantity > existingItem.available) {
         existingItem.maxLimit = true;
         return;
@@ -54,6 +57,7 @@ const cartSlice = createSlice({
 
       existingItem.quantity = setQuantity;
       existingItem.totalprice = existingItem.price * setQuantity;
+      state.totalItems += existingItem.quantity;
     },
   },
 });
