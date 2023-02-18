@@ -7,7 +7,6 @@ const ProductItem = (props) => {
   const dispatch = useDispatch();
   const { id, name, image, colour, type, gender, price, available } =
     props.item;
-  console.log("rrrrrr");
 
   function addToCartHandler() {
     dispatch(

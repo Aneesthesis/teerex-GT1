@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import CartItem from "./CartItem";
 
 const Cart = () => {
-  const { cart } = useSelector((state) => state);
+  const { items } = useSelector((state) => state.cart);
   return (
     <ul>
-      {cart.map((item) => (
+      {items.map((item) => (
         <CartItem
           key={item.id}
           item={{

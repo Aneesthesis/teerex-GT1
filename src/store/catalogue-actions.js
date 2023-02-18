@@ -16,7 +16,7 @@ export const fetchCatalogue = () => {
     try {
       const catalogueData = await fetchedData();
       dispatch(
-        catalogueActions.replaceCatalogue({
+        catalogueActions.initializeCatalogue({
           items: catalogueData || [],
         })
       );

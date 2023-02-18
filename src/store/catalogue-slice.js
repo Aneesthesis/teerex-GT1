@@ -2,10 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const catalogueSlice = createSlice({
   name: "catalogue",
-  initialState: { items: [] },
+  initialState: {
+    items: [],
+    searchedItems: [],
+  },
   reducers: {
-    replaceCatalogue(state, action) {
+    initializeCatalogue(state, action) {
       state.items = action.payload.items;
+    },
+    searchCatalogue(state, action) {
+      const matchedItems = [];
+      const toSearch = action.payload.trim();
+      const expression = new RegExp(`.*${toSearch}.*`, "gi");
+      state.items.map((item) => {
+        if (expression.test(item.name)) {
+          matchedItems.push(item);
+          state.searchedItems = matchedItems;
+        }
+      });
     },
   },
 });

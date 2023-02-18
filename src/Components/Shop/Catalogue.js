@@ -3,12 +3,21 @@ import { useSelector } from "react-redux";
 import ProductItem from "./ProductItem";
 
 function Catalogue(props) {
-  const { items: prods } = useSelector((state) => state.catalogue);
-  console.log(prods);
+  const { cartIsShown, prodIsShown, searchIsOn } = useSelector(
+    (state) => state.ui
+  );
+  const { items, searchedItems } = useSelector((state) => state.catalogue);
+
+  let products = items;
+  if (searchIsOn) {
+    console.log("sio");
+    products = searchedItems;
+  }
+  console.log(products);
 
   return (
     <div className="flex flex-col md:flex-row">
-      {prods.map((prod) => (
+      {products.map((prod) => (
         <ProductItem
           key={prod.id}
           item={{
