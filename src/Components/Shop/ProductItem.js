@@ -25,7 +25,7 @@ const ProductItem = (props) => {
   }
 
   return (
-    <div className="w-2/3">
+    <div className="w-[25%] max-w-[25%]">
       <div className="image">
         <span className="hidden md:block font-bold z-20">{name}</span>
         <img className="w-[2/3]" src={image} alt={name}></img>

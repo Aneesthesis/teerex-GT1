@@ -13,10 +13,14 @@ function Catalogue(props) {
     console.log("sio");
     products = searchedItems;
   }
+  if (!searchIsOn) {
+    console.log("soff");
+    products = items;
+  }
   console.log(products);
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row md:w-screen md:flex-wrap">
       {products.map((prod) => (
         <ProductItem
           key={prod.id}

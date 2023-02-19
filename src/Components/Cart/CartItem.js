@@ -10,7 +10,7 @@ const CartItem = (props) => {
 
   const setItemQuantityHandler = (e) => {
     setItemNumber(e.target.value);
-    dispatch(cartActions.setItemQuantity({ id, itemNumber }));
+    dispatch(cartActions.setItemQuantity({ id, quantity: +itemNumber }));
   };
 
   const deleteItemHandler = () => {

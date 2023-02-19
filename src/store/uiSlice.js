@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
@@ -10,6 +9,9 @@ const uiSlice = createSlice({
     },
     setSearchIsOn(state) {
       state.searchIsOn = true;
+    },
+    setSeachIsoff(state) {
+      state.searchIsOn = false;
     },
   },
 });
