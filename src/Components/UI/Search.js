@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { catalogueActions } from "../../store/catalogue-slice";
 import { uiActions } from "../../store/uiSlice";
+import searchIcon from "../../assets/search-icon.jpg";
 
 const Search = () => {
   const [inputText, setInputText] = useState();
@@ -20,14 +21,20 @@ const Search = () => {
   };
 
   return (
-    <div className="search-bar my-8 mx-[40%]">
+    <div className="search-bar my-8 mx-[40%] flex w-fit">
       <input
         onChange={searchHandler}
         value={inputText}
         type="text"
-        className="border-b-[1px] border-gray-500"
+        className="border-b-[1px] border-gray-500 w-[500px] relative"
         placeholder="Search for products..."
       ></input>
+      <span>
+        <img
+          src={searchIcon}
+          className="w-[15%] object-contain shadow-md cursor-pointer"
+        ></img>
+      </span>
     </div>
   );
 };

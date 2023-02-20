@@ -1,4 +1,6 @@
 import React from "react";
+import cartIcon from "../../assets/cart-icon.jpg";
+//import meals from "../../assets/meals.jpg";
 
 function Header(props) {
   return (
@@ -6,7 +8,12 @@ function Header(props) {
       <h1>TeeRex Store</h1>
       <div className="flex space-x-2">
         <h2 className="hidden md:inline-block">Products</h2>
-        <span onClick={props.onShow}>Cart</span>
+        <span
+          onClick={props.onShow}
+          className="w-[15%] object-contain shadow-md cursor-pointer"
+        >
+          <img src={cartIcon}></img>
+        </span>
       </div>
     </div>
   );
