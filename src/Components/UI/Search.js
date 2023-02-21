@@ -21,18 +21,18 @@ const Search = () => {
   };
 
   return (
-    <div className="search-bar my-8 mx-[40%] flex w-fit">
+    <div className="search-bar w-screen h-[20%] md:my-8 md:mx-[40%] flex relative md:w-1/3 justify-around space-x-4">
       <input
         onChange={searchHandler}
         value={inputText}
         type="text"
-        className="border-b-[1px] border-gray-500 w-[500px] relative"
+        className="border-b-[1px] border-gray-500 "
         placeholder="Search for products..."
       ></input>
       <span>
         <img
           src={searchIcon}
-          className="w-[15%] object-contain shadow-md cursor-pointer"
+          className="md:w-[8%] object-contain shadow-md cursor-pointer"
         ></img>
       </span>
     </div>
