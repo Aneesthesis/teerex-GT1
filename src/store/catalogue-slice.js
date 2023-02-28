@@ -21,6 +21,13 @@ const catalogueSlice = createSlice({
         }
       });
     },
+    filterCatalogue(state, action) {
+      const unfilteredCatalogue = state.items;
+      const filterFactors = action.payload.fF;
+      for (const filterFactor of filterFactors) {
+        unfilteredCatalogue.filter((item) => item.name.contains(filterFactor));
+      }
+    },
   },
 });
 export const catalogueActions = catalogueSlice.actions;

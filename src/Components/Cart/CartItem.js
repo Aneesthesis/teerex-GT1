@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
 
 const CartItem = (props) => {
-  const { id, name, image, colour, type, gender, price, available } =
+  const { id, name, image, colour, type, gender, price, available, quantity } =
     props.item;
-  const [itemNumber, setItemNumber] = useState("");
+  const [itemNumber, setItemNumber] = useState(quantity);
   const dispatch = useDispatch();
 
   const setItemQuantityHandler = (e) => {
     setItemNumber(e.target.value);
-    dispatch(cartActions.setItemQuantity({ id, quantity: +itemNumber }));
+    dispatch(cartActions.setItemQuantity({ id, setQuantity: +itemNumber }));
   };
 
   const deleteItemHandler = () => {
@@ -18,27 +18,29 @@ const CartItem = (props) => {
   };
 
   return (
-    <li>
-      <div className="left">
-        <img src={image}></img>
-        <div className="description">
+    <li className="text-lg flex justify-between space-x-6 mb-8 w-[80%] font-semibold">
+      <div className="left flex space-x-4">
+        <img className="w-10 object-contain" src={image} alt="image"></img>
+        <div className="description w-fit whitespace-nowrap">
           <h2>{name}</h2>
-          <p className="price">{`Rs ${price}`}</p>
+          <p>{`Rs ${price}`}</p>
         </div>
       </div>
-      <div>
+      <div className="right my-auto space-x-4">
         <label htmlFor={id}>Quantity</label>
         <input
+          className="bg-gray-400 w-10 text-center"
           type="number"
           id={id}
-          name="quantity"
           min="1"
-          max="5"
+          max={available}
           onChange={setItemQuantityHandler}
           value={itemNumber}
+          defaultValue={quantity}
         />
         <button
-          className="delete bg-white px-4 py-2 border-black border-[1px]"
+          type="button"
+          className="delete px-2 py-1 bg-white border-black border-[2px] rounded-md hover:text-white hover:bg-gray-700 hover:border-gray-300"
           onClick={deleteItemHandler}
         >
           Delete

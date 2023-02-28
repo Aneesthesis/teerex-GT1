@@ -25,15 +25,15 @@ const ProductItem = (props) => {
   }
 
   return (
-    <div className="w-[25%] max-w-[25%]">
+    <div className="w-full md:w-[25%] md:max-w-[25%]">
       <div className="image">
         <span className="hidden md:block font-bold z-20">{name}</span>
         <img className="w-[2/3]" src={image} alt={name}></img>
       </div>
-      <div className="flex justify-between  font-semibold">
+      <div className="flex justify-between font-semibold">
         <span className="">{`Rs ${price}`}</span>
         <button
-          className="button bg-[#383838] py-2 px-3 text-white"
+          className="button h-[20%] bg-[#383838] py-2 px-3 text-white"
           onClick={addToCartHandler}
         >
           Add to cart

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
+import Filter from "../UI/Filter";
 import ProductItem from "./ProductItem";
 
 function Catalogue(props) {
@@ -20,23 +21,27 @@ function Catalogue(props) {
   console.log(products);
 
   return (
-    <div className="flex flex-col md:flex-row md:w-screen md:flex-wrap">
-      {products.map((prod) => (
-        <ProductItem
-          key={prod.id}
-          item={{
-            id: prod.id,
-            name: prod.name,
-            image: prod.imageURL,
-            colour: prod.color,
-            type: prod.type,
-            gender: prod.gender,
-            price: prod.price,
-            available: prod.quantity,
-          }}
-        />
-      ))}
-    </div>
+    <Fragment>
+      <Filter />
+      <div className="flex flex-col md:flex-row md:screen md:flex-wrap md:space-x-10 md:ml-[15%]">
+        <div></div>
+        {products.map((prod) => (
+          <ProductItem
+            key={prod.id}
+            item={{
+              id: prod.id,
+              name: prod.name,
+              image: prod.imageURL,
+              colour: prod.color,
+              type: prod.type,
+              gender: prod.gender,
+              price: prod.price,
+              available: prod.quantity,
+            }}
+          />
+        ))}
+      </div>
+    </Fragment>
   );
 }
 export default Catalogue;
