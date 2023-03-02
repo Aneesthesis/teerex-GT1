@@ -35,7 +35,6 @@ const CartItem = (props) => {
           min="1"
           max={available}
           onChange={setItemQuantityHandler}
-          value={itemNumber}
           defaultValue={quantity}
         />
         <button

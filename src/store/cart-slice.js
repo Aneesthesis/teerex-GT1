@@ -56,17 +56,9 @@ const cartSlice = createSlice({
         existingItem.maxLimit = true;
         return;
       }
-      const itemQuantity = state.items[existingItemIndex].available;
-      console.log(itemQuantity + "is the oq");
-      state.items[existingItemIndex].quantity = setQuantity;
-      //state.items[existingItemIndex]["quantity"] = setQuantity;
-      console.log(existingItemIndex, setQuantity);
-      //resetting the total items count in the cart
-      //state.totalItems -= existingItem.quantity;
-
-      //existingItem.quantity = setQuantity;
-      //existingItem.totalprice = existingItem.price * setQuantity;
-      //state.totalItems += existingItem.quantity;
+      state.totalItems = state.totalItems - existingItem.quantity;
+      existingItem.quantity = setQuantity;
+      state.totalItems = state.totalItems + existingItem.quantity;
     },
   },
 });
