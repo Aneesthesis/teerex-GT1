@@ -5,12 +5,14 @@ import { cartActions } from "../../store/cart-slice";
 const CartItem = (props) => {
   const { id, name, image, colour, type, gender, price, available, quantity } =
     props.item;
-  const [itemNumber, setItemNumber] = useState(quantity);
+  const [newQuantity, setNewQuantity] = useState(quantity);
   const dispatch = useDispatch();
 
   const setItemQuantityHandler = (e) => {
-    setItemNumber(e.target.value);
-    dispatch(cartActions.setItemQuantity({ id, setQuantity: +itemNumber }));
+    setNewQuantity(e.target.value);
+    dispatch(
+      cartActions.setItemQuantity({ id: id, setQuantity: +e.target.value })
+    );
   };
 
   const deleteItemHandler = () => {

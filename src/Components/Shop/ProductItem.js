@@ -5,7 +5,7 @@ import { cartActions } from "../../store/cart-slice";
 const ProductItem = (props) => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const { id, name, image, colour, type, gender, price, available } =
+  const { id, name, image, colour, type, gender, price, available, quantity } =
     props.item;
 
   function addToCartHandler() {
@@ -19,6 +19,7 @@ const ProductItem = (props) => {
         gender,
         price,
         available,
+        quantity,
       })
     );
     console.log(cart);

@@ -49,16 +49,20 @@ const cartSlice = createSlice({
     },
     setItemQuantity(state, action) {
       const id = action.payload.id;
-      const setQuantity = action.payload.setQuantity;
+      const newQuantity = action.payload.setQuantity;
       const existingItem = state.items.find((item) => item.id === id);
-      const existingItemIndex = state.items.findIndex((item) => item.id === id);
-      if (setQuantity > existingItem.available) {
-        existingItem.maxLimit = true;
-        return;
-      }
-      state.totalItems = state.totalItems - existingItem.quantity;
-      existingItem.quantity = setQuantity;
-      state.totalItems = state.totalItems + existingItem.quantity;
+
+      existingItem.quantity = newQuantity;
+      existingItem.totalprice = existingItem.price * newQuantity;
+
+      state.totalItems = state.items.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+      state.totalCartAmount = state.items.reduce(
+        (acc, item) => acc + item.totalprice,
+        0
+      );
     },
   },
 });

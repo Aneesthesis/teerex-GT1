@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 
 const Filter = () => {
   return (
-    <Fragment>
-      <li className="inline-flex flex-col  mx-8 shadow-md -translate-x-full md:translate-x-0">
+    <div className="absolute top-24">
+      <li className="inline-flex  flex-col  mx-8 shadow-md -translate-x-full md:translate-x-0">
         <ul className="Color flex flex-col my-4">
           <h2>Colour</h2>
           <div className="flex space-x-4">
@@ -64,7 +64,7 @@ const Filter = () => {
           </div>
         </ul>
       </li>
-    </Fragment>
+    </div>
   );
 };
 
