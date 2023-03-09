@@ -7,18 +7,33 @@ function Catalogue(props) {
   const { cartIsShown, prodIsShown, searchIsOn } = useSelector(
     (state) => state.ui
   );
-  const { items, searchedItems } = useSelector((state) => state.catalogue);
+  const { items, searchedItems, filteredCategories } = useSelector(
+    (state) => state.catalogue
+  );
 
   let products = items;
-  if (searchIsOn) {
+
+  if (searchedItems.length !== 0) {
     console.log("sio");
     products = searchedItems;
   }
-  if (!searchIsOn) {
-    console.log("soff");
-    products = items;
+
+  if (filteredCategories.length !== 0) {
+    let filteredProducts = [];
+    console.log(filteredCategories);
+    for (let category of filteredCategories) {
+      filteredProducts = products.filter((product) =>
+        Object.values(product).includes(category)
+      );
+    }
+    products = filteredProducts;
   }
-  console.log(products);
+
+  // if (!searchIsOn) {
+  //   console.log("soff");
+  //   products = items;
+  // }
+  // console.log(products);
 
   return (
     <Fragment>

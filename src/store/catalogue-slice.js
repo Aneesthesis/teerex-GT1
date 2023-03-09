@@ -5,6 +5,7 @@ const catalogueSlice = createSlice({
   initialState: {
     items: [],
     searchedItems: [],
+    filteredCategories: [],
   },
   reducers: {
     initializeCatalogue(state, action) {
@@ -22,10 +23,14 @@ const catalogueSlice = createSlice({
       });
     },
     filterCatalogue(state, action) {
-      const unfilteredCatalogue = state.items;
-      const filterFactors = action.payload.fF;
-      for (const filterFactor of filterFactors) {
-        unfilteredCatalogue.filter((item) => item.name.contains(filterFactor));
+      let id = action.payload;
+      let value = id.slice(0, 1).toUpperCase().concat(id.slice(1));
+      const currentIndex = state.filteredCategories.indexOf(value);
+
+      if (currentIndex === -1) {
+        state.filteredCategories.push(value);
+      } else {
+        state.filteredCategories.splice(currentIndex, 1);
       }
     },
   },
