@@ -4,6 +4,7 @@ import CartItem from "./CartItem";
 
 const Cart = () => {
   const { items, totalCartAmount } = useSelector((state) => state.cart);
+  //const {filteredCategories, searchedItems, filteredItems} = useSelector((state)=>state.catalogue);
 
   let cartContent = (
     <h2 className="font-semibold">No items added to cart, yet!</h2>

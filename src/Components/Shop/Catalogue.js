@@ -1,32 +1,45 @@
 import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../../store/uiSlice";
 import Filter from "../UI/Filter";
+import NoResults from "../UI/NoResults";
 import ProductItem from "./ProductItem";
 
 function Catalogue(props) {
-  const { cartIsShown, prodIsShown, searchIsOn } = useSelector(
-    (state) => state.ui
-  );
-  const { items, searchedItems, filteredCategories } = useSelector(
-    (state) => state.catalogue
-  );
+  const dispatch = useDispatch();
+  const {
+    cartIsShown,
+    prodIsShown,
+    searchIsOn,
+    filterIsActive,
+    searchResultIsEmpty,
+  } = useSelector((state) => state.ui);
+  const { items, searchedItems, filteredCategories, filteredItems } =
+    useSelector((state) => state.catalogue);
 
   let products = items;
 
-  if (searchedItems.length !== 0) {
-    console.log("sio");
+  //applying search onfiltered items
+  if (filteredItems !== 0 && searchIsOn && searchedItems.length) {
     products = searchedItems;
+    console.log(products);
+    dispatch(uiActions.setSearchResultisNotEmpty());
   }
 
-  if (filteredCategories.length !== 0) {
-    let filteredProducts = [];
-    console.log(filteredCategories);
-    for (let category of filteredCategories) {
-      filteredProducts = products.filter((product) =>
-        Object.values(product).includes(category)
-      );
-    }
-    products = filteredProducts;
+  if (searchedItems.length !== 0 && searchIsOn && !filterIsActive) {
+    console.log("sio");
+    products = searchedItems;
+    dispatch(uiActions.setSearchResultisNotEmpty());
+  }
+
+  if (filterIsActive && filteredItems.length !== 0) {
+    console.log("filtering");
+    products = filteredItems;
+  }
+
+  if (searchIsOn && searchedItems.length === 0) {
+    products = [];
+    dispatch(uiActions.setSearchResultisEmpty());
   }
 
   // if (!searchIsOn) {
@@ -37,7 +50,8 @@ function Catalogue(props) {
 
   return (
     <Fragment>
-      <Filter />
+      {!searchResultIsEmpty && <Filter />}
+      {searchIsOn && searchedItems.length === 0 && <NoResults />}
       <div className="flex flex-col md:flex-row md:screen md:flex-wrap md:space-x-10 md:ml-[15%]">
         <div></div>
         {products.map((prod) => (

@@ -2,7 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { cartIsShown: false, searchIsOn: false, prodIsShown: true },
+  initialState: {
+    cartIsShown: false,
+    searchIsOn: false,
+    prodIsShown: true,
+    filterIsActive: false,
+    searchResultIsEmpty: false,
+  },
   reducers: {
     toggleCartVisibility(state) {
       state.cartIsShown = !state.cartIsShown;
@@ -12,6 +18,18 @@ const uiSlice = createSlice({
     },
     setSeachIsoff(state) {
       state.searchIsOn = false;
+    },
+    setFilterisOn(state) {
+      state.filterIsActive = true;
+    },
+    setFilterisOff(state) {
+      state.filterIsActive = false;
+    },
+    setSearchResultisNotEmpty(state) {
+      state.searchResultIsEmpty = false;
+    },
+    setSearchResultisEmpty(state) {
+      state.searchResultIsEmpty = true;
     },
   },
 });

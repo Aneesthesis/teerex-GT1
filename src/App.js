@@ -6,6 +6,7 @@ import { fetchCatalogue } from "./store/catalogue-actions";
 import Search from "./Components/UI/Search";
 import Cart from "./Components/Cart/Cart";
 import { uiActions } from "./store/uiSlice";
+import { catalogueActions } from "./store/catalogue-slice";
 
 function App() {
   let initialRun = true;
@@ -27,6 +28,7 @@ function App() {
   // toggleCart
   function showCartHandler() {
     dispatch(uiActions.toggleCartVisibility());
+    dispatch(catalogueActions.reInitialiseCatalogue());
   }
   return (
     <Fragment>

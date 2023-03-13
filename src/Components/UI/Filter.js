@@ -1,14 +1,22 @@
-import React, { Fragment, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { catalogueActions } from "../../store/catalogue-slice";
+import { uiActions } from "../../store/uiSlice";
 
 const Filter = () => {
   const dispatch = useDispatch();
   const { filteredCategories } = useSelector((state) => state.catalogue);
 
+  useEffect(() => {
+    filteredCategories.length === 0
+      ? dispatch(uiActions.setFilterisOff())
+      : dispatch(uiActions.setFilterisOn());
+  }, [filteredCategories]);
+
   const onCheckboxChange = (e) => {
     const { id, name } = e.target;
-    dispatch(catalogueActions.filterCatalogue(id));
+    dispatch(catalogueActions.catalogueFilterCategories(id));
+    dispatch(catalogueActions.filterCatalogue());
   };
 
   return (
