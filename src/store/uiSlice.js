@@ -10,8 +10,11 @@ const uiSlice = createSlice({
     searchResultIsEmpty: false,
   },
   reducers: {
-    toggleCartVisibility(state) {
-      state.cartIsShown = !state.cartIsShown;
+    setCartVisible(state) {
+      state.cartIsShown = true;
+    },
+    setCartInvisible(state) {
+      state.cartIsShown = false;
     },
     setSearchIsOn(state) {
       state.searchIsOn = true;

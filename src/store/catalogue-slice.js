@@ -30,6 +30,7 @@ const catalogueSlice = createSlice({
       state.filteredItems = noFilteredItems;
     },
     searchCatalogue(state, action) {
+      state.searchedItems = [];
       const matchedItems = [];
       let items = state.items;
       if (state.filteredItems.length !== 0) {
@@ -37,6 +38,7 @@ const catalogueSlice = createSlice({
       }
       console.log(items);
       const toSearch = action.payload.trim().toLowerCase();
+
       //const expression = new RegExp(`.*${toSearch}.*`, "gi");
 
       items.map((item) => {

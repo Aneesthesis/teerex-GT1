@@ -3,42 +3,43 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { catalogueActions } from "../../store/catalogue-slice";
 import { uiActions } from "../../store/uiSlice";
-import searchIcon from "../../assets/search-icon.jpg";
-import filterIcon from "../../assets/filter-icon.jpg";
+import SearchIcon from "./SearchIcon";
+import FilterIcon from "./FilterIcon";
 
 const Search = () => {
-  const [inputText, setInputText] = useState();
+  const [inputText, setInputText] = useState("");
   const dispatch = useDispatch();
 
-  const searchHandler = (e) => {
+  const inputChangeHandler = (e) => {
     const enteredText = e.target.value;
     setInputText(enteredText);
     if (enteredText.trim().length === 0) {
       dispatch(uiActions.setSeachIsoff());
+      dispatch(catalogueActions.reInitialiseCatalogue());
+    }
+  };
+
+  const searchHandler = (e) => {
+    if (inputText.trim().length === 0) {
+      dispatch(uiActions.setSeachIsoff());
       return;
     }
     dispatch(uiActions.setSearchIsOn());
-    dispatch(catalogueActions.searchCatalogue(enteredText));
+    dispatch(catalogueActions.searchCatalogue(inputText));
   };
 
   return (
     <div className="search-bar w- md:my-8 md:mx-[40%] flex relative md:w-1/3 justify-around space-x-4">
       <input
-        onChange={searchHandler}
+        onChange={inputChangeHandler}
         value={inputText}
         type="text"
-        className="border-b-[1px] border-gray-500"
+        className="border-b-[2px] border-black"
         placeholder="Search for products..."
       ></input>
       <div className="flex space-x-6">
-        <img
-          src={searchIcon}
-          className="w-[5%] md:w-[8%] shadow-md cursor-pointer"
-        ></img>
-        <img
-          src={filterIcon}
-          className="w-[5%] md:hidden shadow-md cursor-pointer"
-        ></img>
+        <SearchIcon onSearch={searchHandler} />
+        <FilterIcon />
       </div>
     </div>
   );

@@ -1,13 +1,28 @@
 import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { catalogueActions } from "../../store/catalogue-slice";
+import { uiActions } from "../../store/uiSlice";
 import CartItem from "./CartItem";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const { items, totalCartAmount } = useSelector((state) => state.cart);
   //const {filteredCategories, searchedItems, filteredItems} = useSelector((state)=>state.catalogue);
 
+  const showProductsHandler = () => {
+    dispatch(uiActions.setCartInvisible());
+  };
   let cartContent = (
-    <h2 className="font-semibold">No items added to cart, yet!</h2>
+    <h2 className="font-semibold">
+      No items added to cart, yet! Go back to{" "}
+      <span
+        className="cursor-pointer text-gray-500 underline hover:text-gray-300"
+        onClick={showProductsHandler}
+      >
+        products
+      </span>{" "}
+      to add items.
+    </h2>
   );
 
   if (items.length > 0) {

@@ -27,7 +27,8 @@ function App() {
 
   // toggleCart
   function showCartHandler() {
-    dispatch(uiActions.toggleCartVisibility());
+    dispatch(uiActions.setCartVisible());
+    dispatch(uiActions.setSeachIsoff());
     dispatch(catalogueActions.reInitialiseCatalogue());
   }
   return (
