@@ -16,14 +16,14 @@ function Header(props) {
       <h1>TeeRex Store</h1>
       <div className="flex space-x-2">
         <h2
-          className="hidden md:inline-block mr-6 cursor-pointer hover:underline"
+          className="products-label hidden md:inline-block mr-6 cursor-pointer hover:underline"
           onClick={showProductsHandler}
         >
           Products
         </h2>
         <span
+          className="cart-icon flex bg-white w-[20%] md:w-[15%] object-contain shadow-sm cursor-pointer hover:shadow-xl"
           onClick={props.onShow}
-          className="flex bg-white w-[20%] md:w-[15%] object-contain shadow-md cursor-pointer"
         >
           <img className=" w-[75%]" src={cartIcon}></img>
           <span className="badge text-sm top-0">{totalItems}</span>

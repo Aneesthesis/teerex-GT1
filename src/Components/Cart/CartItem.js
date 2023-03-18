@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
 
-const CartItem = (props) => {
+const CartItem = ({ item }) => {
   const { id, name, image, colour, type, gender, price, available, quantity } =
-    props.item;
-  const [newQuantity, setNewQuantity] = useState(quantity);
+    item;
   const dispatch = useDispatch();
+  const [newQuantity, setNewQuantity] = useState(quantity);
 
   const setItemQuantityHandler = (e) => {
     setNewQuantity(e.target.value);

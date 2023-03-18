@@ -34,9 +34,9 @@ const catalogueSlice = createSlice({
       const matchedItems = [];
       let items = state.items;
       if (state.filteredItems.length !== 0) {
-        items = state.filteredItems;
+        state.items = state.filteredItems;
       }
-      console.log(items);
+      console.log(state.items + "state.items filter + search");
       const toSearch = action.payload.trim().toLowerCase();
 
       //const expression = new RegExp(`.*${toSearch}.*`, "gi");
@@ -48,25 +48,62 @@ const catalogueSlice = createSlice({
         }
       });
     },
-    catalogueFilterCategories(state, action) {
-      let id = action.payload;
-      let value = id.slice(0, 1).toUpperCase().concat(id.slice(1));
-      const currentIndex = state.filteredCategories.indexOf(value);
+    toggleFilter(state, action) {
+      const key = action.payload.id
+        .slice(0, 1)
+        .toUpperCase()
+        .concat(action.payload.id.slice(1));
+      const category = action.payload.name;
+      console.log(typeof key, category, state.filteredCategories.length);
 
-      if (currentIndex === -1) {
-        state.filteredCategories.push(value);
+      if (state.filteredCategories.length === 0) {
+        console.log("adding");
+        state.filteredCategories.push({ key, category });
       } else {
-        state.filteredCategories.splice(currentIndex, 1);
+        let spliced = false;
+        console.log("appending");
+        for (const i in state.filteredCategories) {
+          console.log(i);
+          if (state.filteredCategories[i].key === key) {
+            state.filteredCategories.splice(i, 1);
+            spliced = true;
+          }
+          console.log(spliced);
+        }
+        if (!spliced) {
+          state.filteredCategories.push({ key, category });
+        }
       }
     },
+
     filterCatalogue(state, action) {
+      console.log("yes");
       let allfilteredItems = [];
 
-      for (let category of state.filteredCategories) {
+      for (const i in state.filteredCategories) {
+        // if(i >0 && state.filteredCategories.any()){
+
+        // }
         let products = state.items;
-        let filteredProducts = products.filter((product) =>
-          Object.values(product).includes(category)
-        );
+        let checkedBox = state.filteredCategories[i].key;
+        let checkedBoxType = state.filteredCategories[i].category;
+
+        let filteredProducts = [];
+
+        if (checkedBoxType === "price") {
+          checkedBox = checkedBox.split(",");
+          filteredProducts = products.filter(
+            (product) =>
+              product.price > checkedBox[0] && product.price <= checkedBox[1]
+          );
+        }
+        // if checkedBoxType not equal to "price"
+        else {
+          filteredProducts = products.filter((product) =>
+            Object.values(product).includes(checkedBox)
+          );
+        }
+
         allfilteredItems.push(...filteredProducts);
       }
       state.filteredItems = allfilteredItems;

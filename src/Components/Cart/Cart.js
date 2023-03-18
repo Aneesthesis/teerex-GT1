@@ -16,7 +16,7 @@ const Cart = () => {
     <h2 className="font-semibold">
       No items added to cart, yet! Go back to{" "}
       <span
-        className="cursor-pointer text-gray-500 underline hover:text-gray-300"
+        className="cursor-pointer text-gray-500  hover:underline"
         onClick={showProductsHandler}
       >
         products

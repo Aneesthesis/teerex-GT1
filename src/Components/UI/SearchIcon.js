@@ -5,7 +5,7 @@ function SearchIcon({ onSearch }) {
   const { searchResultIsEmpty } = useSelector((state) => state.ui);
 
   return (
-    <button type="submit" onClick={onSearch}>
+    <button type="submit" onClick={onSearch} className="hover:w-[30px]">
       <svg
         width="25px"
         height="35px"

@@ -15,13 +15,13 @@ const Filter = () => {
 
   const onCheckboxChange = (e) => {
     const { id, name } = e.target;
-    dispatch(catalogueActions.catalogueFilterCategories(id));
+    dispatch(catalogueActions.toggleFilter({ id, name }));
     dispatch(catalogueActions.filterCatalogue());
   };
 
   return (
     <div className="absolute top-24">
-      <li className="inline-flex  flex-col  mx-8 shadow-md -translate-x-full md:translate-x-0">
+      <li className="inline-flex  flex-col  mr-8 shadow-md -translate-x-full md:translate-x-0">
         <ul className="Color flex flex-col my-4">
           <h2>Colour</h2>
           <div className="flex space-x-4">
@@ -89,16 +89,16 @@ const Filter = () => {
           </div>
           <div className="flex space-x-4">
             <input
-              id={[250, 450]}
+              id={[251, 450]}
               type="checkbox"
               name="price"
               onChange={onCheckboxChange}
             ></input>
-            <label htmlFor={[250, 450]}>Rs 251-450</label>
+            <label htmlFor={[251, 450]}>Rs 251-450</label>
           </div>
           <div className="flex space-x-4">
             <input
-              id={[450, 1000]}
+              id={[451, 1000]}
               type="checkbox"
               name="price"
               onChange={onCheckboxChange}

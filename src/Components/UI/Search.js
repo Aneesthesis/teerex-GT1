@@ -29,7 +29,7 @@ const Search = () => {
   };
 
   return (
-    <div className="search-bar w- md:my-8 md:mx-[40%] flex relative md:w-1/3 justify-around space-x-4">
+    <div className="search-bar md:my-8 md:mx-[40%] flex relative md:w-1/3 justify-around">
       <input
         onChange={inputChangeHandler}
         value={inputText}
