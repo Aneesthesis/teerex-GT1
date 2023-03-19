@@ -81,14 +81,23 @@ const catalogueSlice = createSlice({
       let allfilteredItems = [];
 
       for (const i in state.filteredCategories) {
-        // if(i >0 && state.filteredCategories.any()){
-
-        // }
-        let products = state.items;
+        let filteredProducts = [];
         let checkedBox = state.filteredCategories[i].key;
         let checkedBoxType = state.filteredCategories[i].category;
+        let products = state.items;
+        let categories = ["price", "gender", "id", "type"];
 
-        let filteredProducts = [];
+        let orFilter = true;
+
+        //checking if the checkedBox is from a duplicate checkBoxType, in which case OR filter will be applied else AND filter will be used
+        if (i > 0) {
+          orFilter = categories.some((category) => category === checkedBoxType);
+          console.log(i + "iteration");
+          if (!orFilter) {
+            orFilter = false;
+            products = state.filteredProducts;
+          }
+        }
 
         if (checkedBoxType === "price") {
           checkedBox = checkedBox.split(",");
