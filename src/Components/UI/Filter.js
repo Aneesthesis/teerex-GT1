@@ -6,6 +6,7 @@ import { uiActions } from "../../store/uiSlice";
 const Filter = () => {
   const dispatch = useDispatch();
   const { filteredCategories } = useSelector((state) => state.catalogue);
+  const { filterIsVisible } = useSelector((state) => state.ui);
 
   useEffect(() => {
     filteredCategories.length === 0
@@ -20,8 +21,12 @@ const Filter = () => {
   };
 
   return (
-    <div className="absolute top-24">
-      <li className="inline-flex  flex-col  mr-8 shadow-md -translate-x-full md:translate-x-0">
+    <div className="absolute md:top-24">
+      <li
+        className={`${
+          filterIsVisible ? "translate-x-0" : "-translate-x-full"
+        } duration-200 md:translate-x-0 inline-flex flex-col mr-8 shadow-md p-6 bg-[#f1f0f0] rounded-sm`}
+      >
         <ul className="Color flex flex-col my-4">
           <h2>Colour</h2>
           <div className="flex space-x-4">

@@ -12,9 +12,9 @@ function Header(props) {
     dispatch(uiActions.setCartInvisible());
   };
   return (
-    <div className="header flex justify-between p-4 font-semibold bg-[#f1f0f0]">
+    <div className="header flex justify-between p-4 font-semibold bg-[#f1f0f0] ">
       <h1>TeeRex Store</h1>
-      <div className="flex space-x-2">
+      <div className="flex md:space-x-2 space-x-0">
         <h2
           className="products-label hidden md:inline-block mr-6 cursor-pointer hover:underline"
           onClick={showProductsHandler}

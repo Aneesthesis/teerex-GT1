@@ -29,7 +29,7 @@ const Search = () => {
   };
 
   return (
-    <div className="search-bar md:my-8 md:mx-[40%] flex relative md:w-1/3 justify-around">
+    <div className="search-bar md:my-8 md:mx-[40%] flex relative md:w-1/4 justify-around">
       <input
         onChange={inputChangeHandler}
         value={inputText}
@@ -37,7 +37,7 @@ const Search = () => {
         className="border-b-[2px] border-black"
         placeholder="Search for products..."
       ></input>
-      <div className="flex space-x-6">
+      <div className="flex space-x-6 md:space-x-0 mt-4">
         <SearchIcon onSearch={searchHandler} />
         <FilterIcon />
       </div>

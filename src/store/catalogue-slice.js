@@ -26,6 +26,7 @@ const catalogueSlice = createSlice({
 
       state.items = origCatalogue;
       state.searchedItems = noSearchedItems;
+
       state.filteredCategories = noFilteredCategories;
       state.filteredItems = noFilteredItems;
     },
@@ -92,9 +93,9 @@ const catalogueSlice = createSlice({
         //checking if the checkedBox is from a duplicate checkBoxType, in which case OR filter will be applied else AND filter will be used
         if (i > 0) {
           orFilter = categories.some((category) => category === checkedBoxType);
-          console.log(i + "iteration");
+          console.log(i + "iteration", orFilter + " orFilter");
+
           if (!orFilter) {
-            orFilter = false;
             products = state.filteredProducts;
           }
         }

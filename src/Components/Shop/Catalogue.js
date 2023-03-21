@@ -4,6 +4,7 @@ import { uiActions } from "../../store/uiSlice";
 import Filter from "../UI/Filter";
 import NoResults from "../UI/NoResults";
 import ProductItem from "./ProductItem";
+import MaxLimitErrorModal from "../UI/MaxLimitModal";
 
 function Catalogue(props) {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function Catalogue(props) {
   } = useSelector((state) => state.ui);
   const { items, searchedItems, filteredCategories, filteredItems } =
     useSelector((state) => state.catalogue);
+  const { showMaxLimitErrorModal } = useSelector((state) => state.cart);
 
   let products = items;
 
@@ -42,6 +44,8 @@ function Catalogue(props) {
     dispatch(uiActions.setSearchResultisEmpty());
   }
 
+  if (showMaxLimitErrorModal) {
+  }
   // if (!searchIsOn) {
   //   console.log("soff");
   //   products = items;
@@ -52,7 +56,11 @@ function Catalogue(props) {
     <Fragment>
       {!searchResultIsEmpty && <Filter />}
       {searchIsOn && searchedItems.length === 0 && <NoResults />}
-      <div className="flex flex-col md:flex-row md:screen md:flex-wrap md:space-x-10 md:ml-[15%]">
+      <div
+        className={`${
+          showMaxLimitErrorModal ? "z-10 blur-md" : "z-auto blur-none"
+        } flex flex-col md:flex-row md:screen md:flex-wrap md:space-x-10 md:ml-[15%]`}
+      >
         <div></div>
         {products.map((prod) => (
           <ProductItem

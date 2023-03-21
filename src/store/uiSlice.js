@@ -8,6 +8,7 @@ const uiSlice = createSlice({
     prodIsShown: true,
     filterIsActive: false,
     searchResultIsEmpty: false,
+    filterIsVisible: false,
   },
   reducers: {
     setCartVisible(state) {
@@ -26,13 +27,16 @@ const uiSlice = createSlice({
       state.filterIsActive = true;
     },
     setFilterisOff(state) {
-      state.filterIsActive = false;
+      state.filterIsActive = !state.filterIsActive;
     },
     setSearchResultisNotEmpty(state) {
       state.searchResultIsEmpty = false;
     },
     setSearchResultisEmpty(state) {
       state.searchResultIsEmpty = true;
+    },
+    setFilterIsVisible(state) {
+      state.filterIsVisible = !state.filterIsVisible;
     },
   },
 });

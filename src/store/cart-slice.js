@@ -2,7 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: { items: [], totalItems: 0, totalCartAmount: 0 },
+  initialState: {
+    items: [],
+    totalItems: 0,
+    totalCartAmount: 0,
+    showMaxLimitErrorModal: false,
+  },
   reducers: {
     replaceCart(state, action) {
       state.items = action.payload.items;
@@ -16,6 +21,7 @@ const cartSlice = createSlice({
       if (existingItem) {
         if (existingItem.available === existingItem.quantity) {
           existingItem.maxLimit = true;
+          state.showMaxLimitErrorModal = true;
           return;
         }
         // state.totalItems += 1;
