@@ -21,7 +21,7 @@ const Filter = () => {
   };
 
   return (
-    <div className="absolute md:top-24">
+    <div className="absolute md:top-24 z-20">
       <li
         className={`${
           filterIsVisible ? "translate-x-0" : "-translate-x-full"

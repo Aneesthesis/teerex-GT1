@@ -45,6 +45,7 @@ function Catalogue(props) {
   }
 
   if (showMaxLimitErrorModal) {
+    console.log(MaxLimitErrorModal);
   }
   // if (!searchIsOn) {
   //   console.log("soff");
@@ -56,10 +57,11 @@ function Catalogue(props) {
     <Fragment>
       {!searchResultIsEmpty && <Filter />}
       {searchIsOn && searchedItems.length === 0 && <NoResults />}
+      {showMaxLimitErrorModal && <MaxLimitErrorModal />}
       <div
         className={`${
-          showMaxLimitErrorModal ? "z-10 blur-md" : "z-auto blur-none"
-        } flex flex-col md:flex-row md:screen md:flex-wrap md:space-x-10 md:ml-[15%]`}
+          showMaxLimitErrorModal ? "z-10 blur-md scr" : "z-auto blur-none"
+        } flex flex-col space-y-6 md:space-y-10 md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10  md:ml-[15%]`}
       >
         <div></div>
         {products.map((prod) => (

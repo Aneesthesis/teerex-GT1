@@ -26,12 +26,12 @@ const ProductItem = (props) => {
   }
 
   return (
-    <div className="w-full md:w-[25%] md:max-w-[25%]">
+    <div className="w-full md:w-[25%] md:max-w-[25%] px-4 md:px-0 shadow-md">
       <div className="image">
         <span className="hidden md:block font-bold z-20">{name}</span>
-        <img className="w-[2/3]" src={image} alt={name}></img>
+        <img className="w-[80%] m-auto md:w-[2/3]" src={image} alt={name}></img>
       </div>
-      <div className="flex justify-between font-semibold">
+      <div className="flex justify-between items-center font-semibold w-[90%] mt-4 mb-1">
         <span className="">{`Rs ${price}`}</span>
         <button
           className="button h-[20%] bg-[#383838] py-2 px-3 text-white"

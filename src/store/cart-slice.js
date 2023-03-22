@@ -70,6 +70,9 @@ const cartSlice = createSlice({
         0
       );
     },
+    closeMaxLimitErrorModal(state) {
+      state.showMaxLimitErrorModal = false;
+    },
   },
 });
 
