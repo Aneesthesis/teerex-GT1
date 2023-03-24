@@ -7,6 +7,7 @@ import Search from "./Components/UI/Search";
 import Cart from "./Components/Cart/Cart";
 import { uiActions } from "./store/uiSlice";
 import { catalogueActions } from "./store/catalogue-slice";
+import MaxLimitErrorModal from "./Components/UI/MaxLimitModal";
 
 function App() {
   let initialRun = true;

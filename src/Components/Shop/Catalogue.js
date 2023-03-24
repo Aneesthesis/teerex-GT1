@@ -57,12 +57,8 @@ function Catalogue(props) {
     <Fragment>
       {!searchResultIsEmpty && <Filter />}
       {searchIsOn && searchedItems.length === 0 && <NoResults />}
-      {showMaxLimitErrorModal && <MaxLimitErrorModal />}
-      <div
-        className={`${
-          showMaxLimitErrorModal ? "z-10 blur-md scr" : "z-auto blur-none"
-        } flex flex-col space-y-6 md:space-y-10 md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10  md:ml-[15%]`}
-      >
+
+      <div className="flex flex-col space-y-6 md:space-y-10 md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10  md:ml-[15%]">
         <div></div>
         {products.map((prod) => (
           <ProductItem
@@ -79,6 +75,9 @@ function Catalogue(props) {
             }}
           />
         ))}
+        <div className="sticky top-5 m-auto w-fit">
+          <MaxLimitErrorModal />
+        </div>
       </div>
     </Fragment>
   );

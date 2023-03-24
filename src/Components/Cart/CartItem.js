@@ -20,18 +20,23 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <li className="text-lg flex justify-between space-x-6 mb-8 w-[80%] font-semibold">
-      <div className="left flex space-x-4">
-        <img className="w-10 object-contain" src={image} alt="image"></img>
+    <li className="text-lg relative flex justify-between p-2 md:space-x-6 mb-6 md:w-[80%] w-[90%]  font-semibold mx-auto shadow-slate-500 shadow-sm rounded-md">
+      <div className=" relative left flex space-x-4">
+        <img
+          className="w-[30%]  md:w-10 object-contain"
+          src={image}
+          alt="image"
+        ></img>
         <div className="description w-fit whitespace-nowrap">
           <h2>{name}</h2>
           <p>{`Rs ${price}`}</p>
         </div>
       </div>
-      <div className="right my-auto space-x-4">
+      <div className="right flex flex-row items-center space-x-3 md:my-auto md:space-x-4">
+        <div></div>
         <label htmlFor={id}>Quantity</label>
         <input
-          className="bg-gray-400 w-10 text-center"
+          className="bg-gray-400 md:w-10 text-center rounded-md"
           type="number"
           id={id}
           min="1"
