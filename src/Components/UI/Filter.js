@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { catalogueActions } from "../../store/catalogue-slice";
 import { uiActions } from "../../store/uiSlice";
+import CloseFilterButton from "./CloseIcon";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -20,13 +21,24 @@ const Filter = () => {
     dispatch(catalogueActions.filterCatalogue());
   };
 
+  const closeFilterHandler = () => {
+    dispatch(uiActions.setFilterIsVisible(false));
+  };
+
   return (
-    <div className="absolute md:top-24 z-20">
-      <li
-        className={`${
-          filterIsVisible ? "translate-x-0" : "-translate-x-full"
-        } duration-200 md:translate-x-0 inline-flex flex-col mr-8 shadow-md p-6 bg-[#f1f0f0] rounded-sm`}
+    <div
+      className={`${
+        filterIsVisible ? "translate-x-0" : "-translate-x-full"
+      }  duration-200 md:translate-x-0 absolute md:ml-4 top-18 md:top-24 z-20 text-lg md:text-base`}
+    >
+      <div
+        onClick={closeFilterHandler}
+        className="cursor-pointer md:invisible relative top-8 left-[80%] z-30"
       >
+        <CloseFilterButton />
+      </div>
+
+      <div className=" inline-flex flex-col  shadow-md p-6 bg-[#f1f0f0] rounded-sm">
         <ul className="Color flex flex-col my-4">
           <h2>Colour</h2>
           <div className="flex space-x-4">
@@ -142,7 +154,7 @@ const Filter = () => {
             <label htmlFor="basic">Basic</label>
           </div>
         </ul>
-      </li>
+      </div>
     </div>
   );
 };

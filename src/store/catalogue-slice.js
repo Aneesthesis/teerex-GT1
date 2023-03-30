@@ -80,26 +80,28 @@ const catalogueSlice = createSlice({
     filterCatalogue(state, action) {
       console.log("yes");
       let allfilteredItems = [];
+      let products = state.items;
 
       for (const i in state.filteredCategories) {
+        console.log(products.length);
         let filteredProducts = [];
         let checkedBox = state.filteredCategories[i].key;
         let checkedBoxType = state.filteredCategories[i].category;
-        let products = state.items;
-        let categories = ["price", "gender", "id", "type"];
+        let categories = ["price", "gender", "color", "type"];
 
         let orFilter = true;
 
-        //checking if the checkedBox is from a duplicate checkBoxType, in which case OR filter will be applied else AND filter will be used
+        //checking if the checkedBox is from a duplicate checkBoxType, in which OR filter will be applied else AND filter will be used
         if (i > 0) {
           orFilter = categories.some((category) => category === checkedBoxType);
-          console.log(i + "iteration", orFilter + " orFilter");
+          console.log();
 
           if (!orFilter) {
-            products = state.filteredProducts;
+            //AND-FILTER
+            products = filteredProducts;
           }
         }
-
+        console.log(products.length);
         if (checkedBoxType === "price") {
           checkedBox = checkedBox.split(",");
           filteredProducts = products.filter(
@@ -113,8 +115,11 @@ const catalogueSlice = createSlice({
             Object.values(product).includes(checkedBox)
           );
         }
-
-        allfilteredItems.push(...filteredProducts);
+        if (orFilter) {
+          allfilteredItems.push(...filteredProducts);
+        } else {
+          allfilteredItems = filteredProducts;
+        }
       }
       state.filteredItems = allfilteredItems;
     },

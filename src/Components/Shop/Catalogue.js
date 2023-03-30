@@ -5,6 +5,7 @@ import Filter from "../UI/Filter";
 import NoResults from "../UI/NoResults";
 import ProductItem from "./ProductItem";
 import MaxLimitErrorModal from "../UI/MaxLimitModal";
+import { cartActions } from "../../store/cart-slice";
 
 function Catalogue(props) {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function Catalogue(props) {
   } = useSelector((state) => state.ui);
   const { items, searchedItems, filteredCategories, filteredItems } =
     useSelector((state) => state.catalogue);
+
   const { showMaxLimitErrorModal } = useSelector((state) => state.cart);
 
   let products = items;
@@ -45,6 +47,9 @@ function Catalogue(props) {
   }
 
   if (showMaxLimitErrorModal) {
+    setTimeout(() => {
+      dispatch(cartActions.closeMaxLimitErrorModal());
+    }, 2000);
     console.log(MaxLimitErrorModal);
   }
   // if (!searchIsOn) {
@@ -57,8 +62,8 @@ function Catalogue(props) {
     <Fragment>
       {!searchResultIsEmpty && <Filter />}
       {searchIsOn && searchedItems.length === 0 && <NoResults />}
-
-      <div className="flex flex-col space-y-6 md:space-y-10 md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10  md:ml-[15%]">
+      {showMaxLimitErrorModal && <MaxLimitErrorModal />}
+      <div className="flex flex-col relative space-y-6 md:space-y-10 md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10  md:ml-[15%]">
         <div></div>
         {products.map((prod) => (
           <ProductItem
@@ -75,9 +80,6 @@ function Catalogue(props) {
             }}
           />
         ))}
-        <div className="sticky top-5 m-auto w-fit">
-          <MaxLimitErrorModal />
-        </div>
       </div>
     </Fragment>
   );

@@ -12,12 +12,15 @@ function FilterIcon() {
   }
 
   return (
-    <div onClick={filterToggleHandler} className="md:hidden mt-1">
+    <div
+      onClick={filterToggleHandler}
+      className="md:hidden bg-gray-400 active:bg-slate-700 px-3 pt-1"
+    >
       <button>
         <svg
           fill="#000000"
           height="25px"
-          width="30px"
+          width="35px"
           version="1.1"
           id="Capa_1"
           xmlns="http://www.w3.org/2000/svg"
