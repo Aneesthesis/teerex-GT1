@@ -45,7 +45,7 @@ function Catalogue(props) {
     }, 2000);
   }
 
-  const catalogueContent = () => (
+  let catalogueContent = (
     <div className="catalogue">
       <div>
         <Filter />
@@ -73,7 +73,7 @@ function Catalogue(props) {
 
   return (
     <Fragment>
-      {!searchResultIsEmpty && catalogueContent()}
+      {!searchResultIsEmpty && catalogueContent}
       {searchIsOn && searchedItems.length === 0 && <NoResults />}
       {showMaxLimitErrorModal && <MaxLimitErrorModal />}
     </Fragment>

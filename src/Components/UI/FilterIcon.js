@@ -14,7 +14,7 @@ function FilterIcon() {
   return (
     <div
       onClick={filterToggleHandler}
-      className="md:hidden bg-gray-400 active:bg-slate-700 px-3 pt-1"
+      className="md:hidden bg-gray-400 active:bg-slate-700 px-3 pt-1 mr-1"
     >
       <button>
         <svg

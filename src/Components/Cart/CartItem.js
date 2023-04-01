@@ -8,9 +8,25 @@ const CartItem = ({ item }) => {
   const [newQuantity, setNewQuantity] = useState(quantity);
 
   const setItemQuantityHandler = (e) => {
-    setNewQuantity(e.target.value);
+    let enteredQuantity = e.target.value;
+    if (enteredQuantity > available) {
+      e.target.value = available;
+    }
+    setNewQuantity(enteredQuantity);
     dispatch(
-      cartActions.setItemQuantity({ id: id, setQuantity: +e.target.value })
+      cartActions.setItemQuantity({ id: id, setQuantity: +enteredQuantity })
+    );
+  };
+
+  const setMinimumQuantityHandler = (e) => {
+    let enteredQuantity = e.target.value;
+    if (enteredQuantity === "0" || !enteredQuantity) {
+      e.target.value = 1;
+      enteredQuantity = e.target.value;
+    }
+    setNewQuantity(enteredQuantity);
+    dispatch(
+      cartActions.setItemQuantity({ id: id, setQuantity: +enteredQuantity })
     );
   };
 
@@ -41,6 +57,7 @@ const CartItem = ({ item }) => {
           min="1"
           max={available}
           onChange={setItemQuantityHandler}
+          onBlur={setMinimumQuantityHandler}
           defaultValue={quantity}
         />
         <button

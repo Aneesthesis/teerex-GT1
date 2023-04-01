@@ -1,15 +1,26 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/uiSlice";
+import { cartActions } from "../../store/cart-slice";
 import CartItem from "./CartItem";
+import MaxLimitErrorModal from "../UI/MaxLimitModal";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { items, totalCartAmount } = useSelector((state) => state.cart);
+  const { items, totalCartAmount, showMaxLimitErrorModal } = useSelector(
+    (state) => state.cart
+  );
 
   const showProductsHandler = () => {
     dispatch(uiActions.setCartInvisible());
   };
+
+  if (showMaxLimitErrorModal) {
+    setTimeout(() => {
+      dispatch(cartActions.closeMaxLimitErrorModal());
+    }, 2000);
+  }
+
   let cartContent = (
     <h2 className="font-semibold text-center">
       No items added to cart, yet! Go back to{" "}
@@ -56,6 +67,7 @@ const Cart = () => {
     <div className="cart mx-4 my-10 md:my-[5%] md:mx-[30%]">
       <h1 className="text-3xl text-center mb-8">Your Cart</h1>
       <ul className="space-y-10">{cartContent}</ul>
+      {showMaxLimitErrorModal && <MaxLimitErrorModal />}
     </div>
   );
 };

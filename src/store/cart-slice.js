@@ -61,6 +61,10 @@ const cartSlice = createSlice({
       const newQuantity = action.payload.setQuantity;
       const existingItem = state.items.find((item) => item.id === id);
 
+      if (newQuantity > existingItem.available) {
+        state.showMaxLimitErrorModal = true;
+        return;
+      }
       existingItem.quantity = newQuantity;
       existingItem.totalprice = existingItem.price * newQuantity;
 
