@@ -27,7 +27,7 @@ const uiSlice = createSlice({
       state.filterIsActive = true;
     },
     setFilterisOff(state) {
-      state.filterIsActive = !state.filterIsActive;
+      state.filterIsActive = false;
     },
     setSearchResultisNotEmpty(state) {
       state.searchResultIsEmpty = false;

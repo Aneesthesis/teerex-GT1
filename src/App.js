@@ -7,7 +7,6 @@ import Search from "./Components/UI/Search";
 import Cart from "./Components/Cart/Cart";
 import { uiActions } from "./store/uiSlice";
 import { catalogueActions } from "./store/catalogue-slice";
-import MaxLimitErrorModal from "./Components/UI/MaxLimitModal";
 
 function App() {
   let initialRun = true;
@@ -16,17 +15,11 @@ function App() {
     (state) => state.ui
   );
 
-  //initialise catalogue
-  // useEffect(() => {
-  //   dispatch(fetchCatalogue());
-  // }, [dispatch]);
-
   if (initialRun) {
     dispatch(fetchCatalogue());
     initialRun = false;
   }
 
-  // toggleCart
   function showCartHandler() {
     dispatch(uiActions.setCartVisible());
     dispatch(uiActions.setSeachIsoff());
@@ -36,7 +29,7 @@ function App() {
     <Fragment>
       <Header onShow={showCartHandler} />
       {!cartIsShown && (
-        <div className="products">
+        <div className="products-page">
           <Search />
           <Catalogue />
         </div>

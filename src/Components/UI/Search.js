@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { catalogueActions } from "../../store/catalogue-slice";
 import { uiActions } from "../../store/uiSlice";
 import SearchIcon from "./SearchIcon";
@@ -8,17 +8,21 @@ import FilterIcon from "./FilterIcon";
 
 const Search = () => {
   const [inputText, setInputText] = useState("");
+  const { filterIsActive } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
   const inputChangeHandler = (e) => {
     const enteredText = e.target.value;
     setInputText(enteredText);
-    if (enteredText.trim().length === 0) {
+    if (enteredText.trim().length === 0 && !filterIsActive) {
+      //reset catalogue when no search parameters
       dispatch(uiActions.setSeachIsoff());
+      dispatch(uiActions.setSearchResultisNotEmpty());
       dispatch(catalogueActions.reInitialiseCatalogue());
     }
   };
 
+  //search icon clicked
   const searchHandler = (e) => {
     if (inputText.trim().length === 0) {
       dispatch(uiActions.setSeachIsoff());

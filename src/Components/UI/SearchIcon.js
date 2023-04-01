@@ -1,9 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 function SearchIcon({ onSearch }) {
-  const { searchResultIsEmpty } = useSelector((state) => state.ui);
-
   return (
     <button
       type="submit"

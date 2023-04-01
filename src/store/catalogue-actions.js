@@ -16,12 +16,12 @@ export const fetchCatalogue = () => {
     try {
       const catalogueData = await fetchedData();
       dispatch(
-        catalogueActions.initializeCatalogue({
+        catalogueActions.setCatalogue({
           items: catalogueData || [],
         })
       );
     } catch (error) {
-      console.log(error);
+      console.error(error.message);
     }
   };
 };

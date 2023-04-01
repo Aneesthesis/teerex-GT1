@@ -9,16 +9,11 @@ const catalogueSlice = createSlice({
     filteredItems: [],
   },
   reducers: {
-    initializeCatalogue(state, action) {
+    setCatalogue(state, action) {
       state.items = action.payload.items;
     },
+
     reInitialiseCatalogue(state, action) {
-      // state = {
-      //   items: state.items,
-      //   searchedItems: [],
-      //   filteredCategories: [],
-      //   filteredItems: [],
-      // };
       let noSearchedItems = [];
       let noFilteredCategories = [];
       let noFilteredItems = [];
@@ -26,29 +21,30 @@ const catalogueSlice = createSlice({
 
       state.items = origCatalogue;
       state.searchedItems = noSearchedItems;
-
       state.filteredCategories = noFilteredCategories;
       state.filteredItems = noFilteredItems;
     },
+
     searchCatalogue(state, action) {
       state.searchedItems = [];
-      const matchedItems = [];
       let items = state.items;
-      if (state.filteredItems.length !== 0) {
-        state.items = state.filteredItems;
-      }
-      console.log(state.items + "state.items filter + search");
-      const toSearch = action.payload.trim().toLowerCase();
+      const matchedItems = [];
 
-      //const expression = new RegExp(`.*${toSearch}.*`, "gi");
+      if (state.filteredItems.length > 0) {
+        items = state.filteredItems;
+      }
+      console.log(items.length + "items to search");
+      const toSearch = action.payload.trim().toLowerCase();
 
       items.map((item) => {
         if (item.name.trim().toLowerCase().includes(toSearch)) {
           matchedItems.push(item);
-          state.searchedItems = matchedItems;
         }
+        state.searchedItems = matchedItems;
+        console.log(state.searchedItems);
       });
     },
+
     toggleFilter(state, action) {
       const key = action.payload.id
         .slice(0, 1)

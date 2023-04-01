@@ -24,46 +24,36 @@ function Catalogue(props) {
   let products = items;
 
   //applying search onfiltered items
-  if (filteredItems !== 0 && searchIsOn && searchedItems.length) {
+  if (filterIsActive && searchIsOn && searchedItems.length > 0) {
     products = searchedItems;
     console.log(products);
-    dispatch(uiActions.setSearchResultisNotEmpty());
   }
 
-  if (searchedItems.length !== 0 && searchIsOn && !filterIsActive) {
-    console.log("sio");
+  if (searchIsOn && searchedItems.length !== 0 && !filterIsActive) {
     products = searchedItems;
     dispatch(uiActions.setSearchResultisNotEmpty());
-  }
-
-  if (filterIsActive && filteredItems.length !== 0) {
-    console.log("filtering");
-    products = filteredItems;
   }
 
   if (searchIsOn && searchedItems.length === 0) {
-    products = [];
     dispatch(uiActions.setSearchResultisEmpty());
+  }
+
+  if (filterIsActive && filteredItems.length !== 0 && !searchIsOn) {
+    products = filteredItems;
   }
 
   if (showMaxLimitErrorModal) {
     setTimeout(() => {
       dispatch(cartActions.closeMaxLimitErrorModal());
     }, 2000);
-    console.log(MaxLimitErrorModal);
   }
-  // if (!searchIsOn) {
-  //   console.log("soff");
-  //   products = items;
-  // }
-  // console.log(products);
 
-  return (
-    <Fragment>
-      {!searchResultIsEmpty && <Filter />}
-      {searchIsOn && searchedItems.length === 0 && <NoResults />}
-      {showMaxLimitErrorModal && <MaxLimitErrorModal />}
-      <div className="flex flex-col relative space-y-6 md:space-y-10 md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10  md:ml-[15%]">
+  const catalogueContent = () => (
+    <div className="catalogue">
+      <div>
+        <Filter />
+      </div>
+      <div className="flex flex-col relative space-y-6 md:space-y-10 md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10 md:ml-[15%]  ">
         <div></div>
         {products.map((prod) => (
           <ProductItem
@@ -81,6 +71,14 @@ function Catalogue(props) {
           />
         ))}
       </div>
+    </div>
+  );
+
+  return (
+    <Fragment>
+      {!searchResultIsEmpty && catalogueContent()}
+      {searchIsOn && searchedItems.length === 0 && <NoResults />}
+      {showMaxLimitErrorModal && <MaxLimitErrorModal />}
     </Fragment>
   );
 }

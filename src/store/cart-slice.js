@@ -24,11 +24,12 @@ const cartSlice = createSlice({
           state.showMaxLimitErrorModal = true;
           return;
         }
-        // state.totalItems += 1;
         existingItem.quantity += 1;
         existingItem.totalprice += newItem.price;
       }
+
       if (!existingItem) {
+        //if item's not already present in cart
         state.items.push({
           id: newItem.id,
           name: newItem.name,
@@ -48,11 +49,13 @@ const cartSlice = createSlice({
       const id = action.payload;
       const deletedItemIndex = state.items.findIndex((item) => item.id === id);
       const deletedItem = state.items[deletedItemIndex];
-      console.log(deletedItem.quantity);
+
       state.items = state.items.filter((item) => item.id !== id);
       state.totalItems = state.totalItems - +deletedItem.quantity;
       state.totalCartAmount -= deletedItem.totalprice;
     },
+
+    //edit quantity of each item present in cart
     setItemQuantity(state, action) {
       const id = action.payload.id;
       const newQuantity = action.payload.setQuantity;
@@ -70,6 +73,7 @@ const cartSlice = createSlice({
         0
       );
     },
+
     closeMaxLimitErrorModal(state) {
       state.showMaxLimitErrorModal = false;
     },

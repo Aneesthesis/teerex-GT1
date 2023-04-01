@@ -9,12 +9,14 @@ const Filter = () => {
   const { filteredCategories } = useSelector((state) => state.catalogue);
   const { filterIsVisible } = useSelector((state) => state.ui);
 
+  //activate filtering
   useEffect(() => {
     filteredCategories.length === 0
       ? dispatch(uiActions.setFilterisOff())
       : dispatch(uiActions.setFilterisOn());
   }, [filteredCategories]);
 
+  //manage checkboxes
   const onCheckboxChange = (e) => {
     const { id, name } = e.target;
     dispatch(catalogueActions.toggleFilter({ id, name }));
