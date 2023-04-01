@@ -9,15 +9,12 @@ import { cartActions } from "../../store/cart-slice";
 
 function Catalogue(props) {
   const dispatch = useDispatch();
-  const {
-    cartIsShown,
-    prodIsShown,
-    searchIsOn,
-    filterIsActive,
-    searchResultIsEmpty,
-  } = useSelector((state) => state.ui);
-  const { items, searchedItems, filteredCategories, filteredItems } =
-    useSelector((state) => state.catalogue);
+  const { searchIsOn, filterIsActive, searchResultIsEmpty } = useSelector(
+    (state) => state.ui
+  );
+  const { items, searchedItems, filteredItems } = useSelector(
+    (state) => state.catalogue
+  );
 
   const { showMaxLimitErrorModal } = useSelector((state) => state.cart);
 
@@ -53,7 +50,7 @@ function Catalogue(props) {
       <div>
         <Filter />
       </div>
-      <div className="flex flex-col relative space-y-6 md:space-y-10 md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10 md:ml-[15%]  ">
+      <div className="flex flex-col relative space-y-6 md:space-y-10 mx-auto md:mx-4 md:flex-row md:screen md:flex-wrap md:space-x-10 md:ml-[15%]  ">
         <div></div>
         {products.map((prod) => (
           <ProductItem

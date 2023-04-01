@@ -19,9 +19,11 @@ function Header(props) {
     <div
       className={`sticky ${
         scrollDirection === "down" ? "-top-24" : "top-0"
-      } header flex sticky h-18 z-[60] justify-between items-center p-4 font-semibold bg-[#f1f0f0] md:px-4 h-18 transition-all duration-500`}
+      } header flex sticky h-18 z-[60] w-full justify-between items-center p-4 font-semibold bg-[#f1f0f0] md:px-4 h-18 transition-all duration-500`}
     >
-      <h1>TeeRex Store</h1>
+      <h1 onClick={showProductsHandler} className="cursor-pointer">
+        TeeRex Store
+      </h1>
       <div className="flex items-center  md:justify-between md:space-x-8">
         <h2
           className="products-label hidden md:inline-block cursor-pointer hover:underline"

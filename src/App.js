@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import Header from "./Components/UI/Header";
 import Catalogue from "./Components/Shop/Catalogue";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +11,7 @@ import { catalogueActions } from "./store/catalogue-slice";
 function App() {
   let initialRun = true;
   const dispatch = useDispatch();
-  const { cartIsShown, prodIsShown, searchIsOn } = useSelector(
-    (state) => state.ui
-  );
+  const { cartIsShown } = useSelector((state) => state.ui);
 
   if (initialRun) {
     dispatch(fetchCatalogue());

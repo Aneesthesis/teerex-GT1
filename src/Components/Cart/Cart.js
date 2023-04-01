@@ -1,13 +1,11 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { catalogueActions } from "../../store/catalogue-slice";
 import { uiActions } from "../../store/uiSlice";
 import CartItem from "./CartItem";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { items, totalCartAmount } = useSelector((state) => state.cart);
-  //const {filteredCategories, searchedItems, filteredItems} = useSelector((state)=>state.catalogue);
 
   const showProductsHandler = () => {
     dispatch(uiActions.setCartInvisible());
