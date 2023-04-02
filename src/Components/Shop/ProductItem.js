@@ -22,7 +22,6 @@ const ProductItem = (props) => {
         quantity,
       })
     );
-    console.log(cart);
   }
 
   return (

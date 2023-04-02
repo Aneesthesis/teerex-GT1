@@ -18,6 +18,7 @@ const CartItem = ({ item }) => {
     );
   };
 
+  //set item quantity to 1 when the quantity is set to zero or left blank
   const setMinimumQuantityHandler = (e) => {
     let enteredQuantity = e.target.value;
     if (enteredQuantity === "0" || !enteredQuantity) {
@@ -54,6 +55,7 @@ const CartItem = ({ item }) => {
           className="bg-gray-400 w-8 md:w-10 text-center rounded-md"
           type="number"
           id={id}
+          step="none"
           min="1"
           max={available}
           onChange={setItemQuantityHandler}
