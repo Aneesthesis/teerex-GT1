@@ -51,7 +51,7 @@ const catalogueSlice = createSlice({
         .toUpperCase()
         .concat(action.payload.id.slice(1));
       const category = action.payload.name;
-      console.log(typeof key, category, state.filteredCategories.length);
+      //console.log(typeof key, category, state.filteredCategories.length);
 
       if (state.filteredCategories.length === 0) {
         console.log("adding");
@@ -79,45 +79,47 @@ const catalogueSlice = createSlice({
       let products = state.items;
 
       for (const i in state.filteredCategories) {
-        console.log(products.length);
         let filteredProducts = [];
         let checkedBox = state.filteredCategories[i].key;
         let checkedBoxType = state.filteredCategories[i].category;
         let categories = ["price", "gender", "color", "type"];
 
-        let orFilter = true;
-
-        //checking if the checkedBox is from a duplicate checkBoxType, in which OR filter will be applied else AND filter will be used
-        if (i > 0) {
-          orFilter = categories.some((category) => category === checkedBoxType);
-          console.log();
-
-          if (!orFilter) {
-            //AND-FILTER
-            products = filteredProducts;
+        if (i < 1) {
+          console.log("first iterate");
+          if (checkedBoxType === "price") {
+            let checkedBoxRange = checkedBox.split(",");
+            filteredProducts = products.filter(
+              (product) =>
+                product.price > checkedBoxRange[0] &&
+                product.price <= checkedBoxRange[1]
+            );
           }
-        }
-        console.log(products.length);
-        if (checkedBoxType === "price") {
-          checkedBox = checkedBox.split(",");
-          filteredProducts = products.filter(
-            (product) =>
-              product.price > checkedBox[0] && product.price <= checkedBox[1]
-          );
-        }
-        // if checkedBoxType not equal to "price"
-        else {
-          filteredProducts = products.filter((product) =>
-            Object.values(product).includes(checkedBox)
-          );
-        }
-        if (orFilter) {
-          allfilteredItems.push(...filteredProducts);
+          // if checkedBoxType is not equal to "price"
+          else {
+            filteredProducts = products.filter((product) =>
+              Object.values(product).includes(checkedBox)
+            );
+          }
+          allfilteredItems = filteredProducts; // Store the results of the first iteration
         } else {
-          allfilteredItems = filteredProducts;
+          // Apply AND filter by taking the intersection
+          if (checkedBoxType === "price") {
+            checkedBox = checkedBox.split(",");
+            filteredProducts = allfilteredItems.filter(
+              (product) =>
+                product.price > checkedBox[0] && product.price <= checkedBox[1]
+            );
+          }
+          // if checkedBoxType is not equal to "price"
+          else {
+            filteredProducts = allfilteredItems.filter((product) =>
+              Object.values(product).includes(checkedBox)
+            );
+          }
+          allfilteredItems = filteredProducts; // Update allfilteredItems with the AND-filtered results
         }
       }
-      state.filteredItems = allfilteredItems;
+      state.filteredItems = [...new Set(allfilteredItems)] || [];
     },
   },
 });

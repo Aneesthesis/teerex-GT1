@@ -23,7 +23,6 @@ function Catalogue(props) {
   //applying search onfiltered items
   if (filterIsActive && searchIsOn && searchedItems.length > 0) {
     products = searchedItems;
-    console.log(products);
   }
 
   if (searchIsOn && searchedItems.length !== 0 && !filterIsActive) {
